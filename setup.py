@@ -14,6 +14,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
 
     install_requires=['requests>=2.9.1'],
+    keywords=['currency', 'currencylayer', 'exchangerate', 'rates'],  # arbitrary keywords
 
     classifiers=[
         'Programming Language :: Python :: 2.7',
