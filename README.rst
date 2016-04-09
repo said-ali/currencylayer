@@ -1,6 +1,5 @@
 currencylayer
 =============
-
 .. image:: https://img.shields.io/pypi/v/currencylayer.svg
 :target: https://pypi.python.org/pypi/currencylayer
     :alt: Latest PyPI version
