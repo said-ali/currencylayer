@@ -1,3 +1,4 @@
+import datetime
 import requests
 
 
@@ -22,4 +23,13 @@ class Client(object):
 
     def live_rates(self, base_currency='USD'):
         response = self.client.get(self.endpoint_live, params={'source': base_currency})
+        return response.json()
+
+    def live_rates_for(self, currencies, base_currency='USD'):
+        currencies = ','.join(currencies)
+        response = self.client.get(self.endpoint_live, params={'currencies': currencies, 'source': base_currency})
+        return response.json()
+
+    def historical(self, date=datetime.date.today(), base_currency='USD'):
+        response = self.client.get(self.endpoint_historical, params={'date': date, 'source': base_currency})
         return response.json()
