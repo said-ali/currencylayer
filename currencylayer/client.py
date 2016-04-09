@@ -22,6 +22,8 @@ class Client(object):
         return response.json()
 
     def live_rates(self, base_currency='USD'):
+        if isinstance(base_currency, list):
+            base_currency = ','.join(base_currency)
         response = self.client.get(self.endpoint_live, params={'source': base_currency})
         return response.json()
 
