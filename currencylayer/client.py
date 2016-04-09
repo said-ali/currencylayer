@@ -33,3 +33,16 @@ class Client(object):
     def historical(self, date=datetime.date.today(), base_currency='USD'):
         response = self.client.get(self.endpoint_historical, params={'date': date, 'source': base_currency})
         return response.json()
+
+    def convert(self, from_currency, to_currency, amount, date=datetime.date.today()):
+        response = self.client.get(self.endpoint_convert,
+                                   params={'from': from_currency, 'to': to_currency, 'amount': amount, 'date': date})
+        return response.json()
+
+    def timeframe(self, start_date, end_date, currencies, base_currency='USD'):
+        if isinstance(currencies, list):
+            currencies = ','.join(currencies)
+        response = self.client.get(self.endpoint_time_frame,
+                                   params={'currencies': currencies, 'start_date': start_date, 'end_date': end_date,
+                                           'source': base_currency})
+        return response.json()
