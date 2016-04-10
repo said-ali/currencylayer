@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="currencylayer",
-    version="0.1",
+    version="0.2",
     url="https://github.com/Said007/currencylayer",
 
     author="Said Ali",
