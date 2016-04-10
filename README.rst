@@ -18,7 +18,7 @@ with currencylayer:
     import currencylayer
     exchange_rate = currencylayer.Client(access_key=YOUR_ACCESS_KEY)
     exchange_rate.currencies()
-    e.g reponse
+    e.g response
         {
             "terms": "https://currencylayer.com/terms",
             "privacy": "https://currencylayer.com/privacy",
@@ -40,7 +40,7 @@ To get live rates, Call live_rates method and pass optional currency
     import currencylayer
     exchange_rate = currencylayer.Client(access_key=YOUR_ACCESS_KEY)
     exchange_rate.live_rates(base_currency='GBP')
-    e.g reponse
+    e.g response
         {
             "success": true,
             "terms": "https://currencylayer.com/terms",
@@ -69,7 +69,7 @@ To get live rates, for specific currencies Call live_rates_for method and pass o
     import currencylayer
     exchange_rate = currencylayer.Client(access_key=YOUR_ACCESS_KEY)
     exchange_rate.live_rates_for(currencies=['AUD','CHF','EUR','GBP','PLN'], base_currency='USD')
-    e.g reponse
+    e.g response
         {
             "success": true,
             "terms": "https://currencylayer.com/terms",
@@ -94,7 +94,7 @@ To get historical rates, Call historical method and pass date and currency. If n
     import currencylayer
     exchange_rate = currencylayer.Client(access_key=YOUR_ACCESS_KEY)
     exchange_rate.historical(date='2005-02-01', base_currency='USD')
-    e.g reponse
+    e.g response
         {
           "success": true,
           "terms": "https://currencylayer.com/terms",
@@ -124,7 +124,7 @@ To convert rate from one currency to another, Call convert method and pass three
     import currencylayer
     exchange_rate = currencylayer.Client(access_key=YOUR_ACCESS_KEY)
     exchange_rate.convert(from_currency='USD', to_currency='GBP', amount=10)
-    e.g reponse
+    e.g response
         {
           "success": true,
           "terms": "https://currencylayer.com/terms",
@@ -150,7 +150,7 @@ To request historical exchange rates for a time-period of your choice call timef
     import currencylayer
     exchange_rate = currencylayer.Client(access_key=YOUR_ACCESS_KEY)
     exchange_rate.timeframe(start_date='2010-03-01', end_date='2010-04-01', currencies=['USD', 'GBP', 'EUR'])
-    e.g reponse
+    e.g response
         {
           "success": true,
           "terms": "https://currencylayer.com/terms",
@@ -184,7 +184,7 @@ Call change_queries and pass three required parameters. start_date, end_date, cu
     import currencylayer
     exchange_rate = currencylayer.Client(access_key=YOUR_ACCESS_KEY)
     exchange_rate.change_queries(start_date='2010-03-01', end_date='2010-04-01', currencies=['AUD','EUR','MXN'])
-    e.g reponse
+    e.g response
         {
           "success":true,
           "terms":"https:\/\/currencylayer.com\/terms",
