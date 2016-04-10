@@ -4,7 +4,7 @@ currencylayer
 :target: https://pypi.python.org/pypi/currencylayer
     :alt: Latest PyPI version
 
-        Python API client for currencylayer. This library supports all API access provide by currencylayer.
+        Python API client for currencylayer. This library supports all API access provide by currencylayer. Check https://currencylayer.com/documentation for more info.
         This package is compatible with Python 2.7, 3.0 to 3.5
 
 Basic Use
@@ -117,7 +117,7 @@ To get historical rates, Call historical method and pass date and currency. If n
 
 Currency Conversion
 ---------
-To convert rate from one currency to another, Call convert method and pass three required parameter. from_currency, to_currency, amount and optional date.
+To convert rate from one currency to another, Call convert method and pass three required parameters. from_currency, to_currency, amount and optional date.
 
 .. code:: python
 
@@ -143,44 +143,77 @@ To convert rate from one currency to another, Call convert method and pass three
 
 Time-Frame Queries
 ---------
+To request historical exchange rates for a time-period of your choice call timeframe function pass three required parameters. start_date, end_date, currencies which must be a list  and optional date.
+
+.. code:: python
+
+    import currencylayer
+    exchange_rate = currencylayer.Client(access_key=YOUR_ACCESS_KEY)
+    exchange_rate.timeframe(start_date='2010-03-01', end_date='2010-04-01', currencies=['USD', 'GBP', 'EUR'])
+    e.g reponse
+        {
+          "success": true,
+          "terms": "https://currencylayer.com/terms",
+          "privacy": "https://currencylayer.com/privacy",
+          "timeframe": true,
+          "start_date": "2010-03-01",
+          "end_date": "2010-04-01",
+          "source": "USD",
+          "quotes": {
+            "2010-03-01": {
+              "USDUSD": 1,
+              "USDGBP": 0.668525,
+              "USDEUR": 0.738541
+            },
+            "2010-03-02": {
+              "USDUSD": 1,
+              "USDGBP": 0.668827,
+              "USDEUR": 0.736145
+            },
+            [...]
+          }
+        }
+
+Currency-Change Queries
+---------
 To request the change (both margin and percentage) of one or more currencies, relative to a Source Currency, within a specific time-frame (optional).
 Call change_queries and pass three required parameters. start_date, end_date, currencies which must be a list and optional base_currency
+
 .. code:: python
 
     import currencylayer
     exchange_rate = currencylayer.Client(access_key=YOUR_ACCESS_KEY)
     exchange_rate.change_queries(start_date='2010-03-01', end_date='2010-04-01', currencies=['AUD','EUR','MXN'])
     e.g reponse
-            {
-              "success": true,
-              "terms": "https://currencylayer.com/terms",
-              "privacy": "https://currencylayer.com/privacy",
-              "change": true,
-              "start_date": "2005-01-01",
-              "end_date": "2010-01-01",
-              "source": "USD",
-              "quotes": {
-                "USDAUD": {
-                  "start_rate": 1.281236,
-                  "end_rate": 1.108609,
-                  "change": -0.1726,
-                  "change_pct": -13.4735
-                },
-                "USDEUR": {
-                  "start_rate": 0.73618,
-                  "end_rate": 0.697253,
-                  "change": -0.0389,
-                  "change_pct": -5.2877
-                },
-                "USDMXN":{
-                  "start_rate": 11.149362,
-                  "end_rate": 13.108757,
-                  "change": 1.9594,
-                  "change_pct": 17.5741
-                }
-              }
+        {
+          "success":true,
+          "terms":"https:\/\/currencylayer.com\/terms",
+          "privacy":"https:\/\/currencylayer.com\/privacy",
+          "change":true,
+          "start_date":"2005-01-01",
+          "end_date":"2010-01-01",
+          "source":"USD",
+          "quotes":{
+            "USDAUD":{
+              "start_rate":1.28124,
+              "end_rate":1.108613,
+              "change":-0.1726,
+              "change_pct":-13.4734
+            },
+            "USDEUR":{
+              "start_rate":0.73618,
+              "end_rate":0.697257,
+              "change":-0.0389,
+              "change_pct":-5.2872
+            },
+            "USDMXN":{
+              "start_rate":11.149366,
+              "end_rate":13.108761,
+              "change":1.9594,
+              "change_pct":17.574
             }
-
+          }
+        }
 
 Unit Test
 ---------
