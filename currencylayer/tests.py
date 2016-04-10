@@ -1,4 +1,5 @@
 import unittest
+from decimal import Decimal
 from client import Client
 
 
@@ -51,8 +52,8 @@ class TestClient(unittest.TestCase):
         self.assertEqual(True, historical['historical'])
         self.assertEqual('2005-02-01', historical['date'])
         self.assertEqual('USD', historical['source'])
-        self.assertEqual(0.531483, historical['quotes']['USDGBP'])
-        self.assertEqual(0.76715, historical['quotes']['USDEUR'])
+        self.assertEqual(Decimal('0.531483'), historical['quotes']['USDGBP'])
+        self.assertEqual(Decimal('0.76715'), historical['quotes']['USDEUR'])
 
     def test_get_historical_for_GB(self):
         historical = self.client.historical('2005-02-01', base_currency='GBP')
@@ -75,8 +76,8 @@ class TestClient(unittest.TestCase):
 
         self.assertEqual('USD', convert_rate['query']['from'])
         self.assertEqual('GBP', convert_rate['query']['to'])
-        self.assertEqual(10, convert_rate['query']['amount'])
-        self.assertEqual(5.1961, convert_rate['result'])
+        self.assertEqual(Decimal('10'), convert_rate['query']['amount'])
+        self.assertEqual(Decimal('5.1961'), convert_rate['result'])
         self.assertEqual("2005-01-01", convert_rate['date'])
 
     def test_timeframe(self):
@@ -90,13 +91,13 @@ class TestClient(unittest.TestCase):
         self.assertEqual('2010-03-01', time_frame['start_date'])
         self.assertEqual('2010-04-01', time_frame['end_date'])
 
-        self.assertEqual(1, time_frame['quotes']['2010-03-01']['USDUSD'])
-        self.assertEqual(0.668529, time_frame['quotes']['2010-03-01']['USDGBP'])
-        self.assertEqual(0.738545, time_frame['quotes']['2010-03-01']['USDEUR'])
+        self.assertEqual(Decimal('1'), time_frame['quotes']['2010-03-01']['USDUSD'])
+        self.assertEqual(Decimal('0.668529'), time_frame['quotes']['2010-03-01']['USDGBP'])
+        self.assertEqual(Decimal('0.738545'), time_frame['quotes']['2010-03-01']['USDEUR'])
 
-        self.assertEqual(1, time_frame['quotes']['2010-03-02']['USDUSD'])
-        self.assertEqual(0.668831, time_frame['quotes']['2010-03-02']['USDGBP'])
-        self.assertEqual(0.736149, time_frame['quotes']['2010-03-02']['USDEUR'])
+        self.assertEqual(Decimal('1'), time_frame['quotes']['2010-03-02']['USDUSD'])
+        self.assertEqual(Decimal('0.668831'), time_frame['quotes']['2010-03-02']['USDGBP'])
+        self.assertEqual(Decimal('0.736149'), time_frame['quotes']['2010-03-02']['USDEUR'])
 
     def test_timeframe_for_GB(self):
         time_frame = self.client.timeframe('2010-03-01', '2010-04-01', ['USD', 'EUR'], 'GBP')
@@ -109,11 +110,11 @@ class TestClient(unittest.TestCase):
         self.assertEqual('2010-03-01', time_frame['start_date'])
         self.assertEqual('2010-04-01', time_frame['end_date'])
 
-        self.assertEqual(1.495821, time_frame['quotes']['2010-03-01']['GBPUSD'])
-        self.assertEqual(1.104731, time_frame['quotes']['2010-03-01']['GBPEUR'])
+        self.assertEqual(Decimal('1.495821'), time_frame['quotes']['2010-03-01']['GBPUSD'])
+        self.assertEqual(Decimal('1.104731'), time_frame['quotes']['2010-03-01']['GBPEUR'])
 
-        self.assertEqual(1.495146, time_frame['quotes']['2010-03-02']['GBPUSD'])
-        self.assertEqual(1.10065, time_frame['quotes']['2010-03-02']['GBPEUR'])
+        self.assertEqual(Decimal('1.495146'), time_frame['quotes']['2010-03-02']['GBPUSD'])
+        self.assertEqual(Decimal('1.10065'), time_frame['quotes']['2010-03-02']['GBPEUR'])
 
     def test_change_queries(self):
         time_frame = self.client.change_queries('2005-01-01', '2010-01-01', ['GBP', 'EUR'])
@@ -126,12 +127,12 @@ class TestClient(unittest.TestCase):
         self.assertEqual('2005-01-01', time_frame['start_date'])
         self.assertEqual('2010-01-01', time_frame['end_date'])
 
-        self.assertEqual(0.51961, time_frame['quotes']['USDGBP']['start_rate'])
-        self.assertEqual(0.618228, time_frame['quotes']['USDGBP']['end_rate'])
-        self.assertEqual(0.0986, time_frame['quotes']['USDGBP']['change'])
-        self.assertEqual(18.9792, time_frame['quotes']['USDGBP']['change_pct'])
+        self.assertEqual(Decimal('0.51961'), time_frame['quotes']['USDGBP']['start_rate'])
+        self.assertEqual(Decimal('0.618228'), time_frame['quotes']['USDGBP']['end_rate'])
+        self.assertEqual(Decimal('0.0986'), time_frame['quotes']['USDGBP']['change'])
+        self.assertEqual(Decimal('18.9792'), time_frame['quotes']['USDGBP']['change_pct'])
 
-        self.assertEqual(0.73618, time_frame['quotes']['USDEUR']['start_rate'])
+        self.assertEqual(Decimal('0.73618'), time_frame['quotes']['USDEUR']['start_rate'])
 
 
 if __name__ == '__main__':
