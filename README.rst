@@ -217,7 +217,7 @@ Call change_queries and pass three required parameters. start_date, end_date, cu
 
 Unit Test
 ---------
-To tun unit test run:
+To run unit test:
 
 .. code:: python
 
