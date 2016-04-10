@@ -48,3 +48,11 @@ class Client(object):
                                    params={'currencies': currencies, 'start_date': start_date, 'end_date': end_date,
                                            'source': base_currency})
         return response.json()
+
+    def change_queries(self, start_date, end_date, currencies, base_currency='USD'):
+        if isinstance(currencies, list):
+            currencies = ','.join(currencies)
+        response = self.client.get(self.endpoint_change,
+                                   params={'currencies': currencies, 'start_date': start_date, 'end_date': end_date,
+                                           'source': base_currency})
+        return response.json()

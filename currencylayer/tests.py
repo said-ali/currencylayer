@@ -66,7 +66,8 @@ class TestClient(unittest.TestCase):
         self.assertEqual('GBP', historical['source'])
 
     def test_convert(self):
-        convert_rate = self.client.convert('USD', 'GBP', 10)
+        convert_rate = self.client.convert('USD', 'GBP', 10, '2005-01-01')
+        print convert_rate
 
         if 'error' in convert_rate:
             raise unittest.SkipTest(
@@ -75,7 +76,8 @@ class TestClient(unittest.TestCase):
         self.assertEqual('USD', convert_rate['query']['from'])
         self.assertEqual('GBP', convert_rate['query']['to'])
         self.assertEqual(10, convert_rate['query']['amount'])
-        self.assertIsNotNone(convert_rate['query']['result'])
+        self.assertEqual(5.1961, convert_rate['result'])
+        self.assertEqual("2005-01-01", convert_rate['date'])
 
     def test_timeframe(self):
         time_frame = self.client.timeframe('2010-03-01', '2010-04-01', ['USD', 'GBP', 'EUR'])
@@ -84,16 +86,52 @@ class TestClient(unittest.TestCase):
             raise unittest.SkipTest(
                 'SKIPPED TESTED DUE NOT HAVING ENTERPRISE ACCOUNT FOR TEST: test_timeframe')
 
+        self.assertEqual('USD', time_frame['source'])
         self.assertEqual('2010-03-01', time_frame['start_date'])
         self.assertEqual('2010-04-01', time_frame['end_date'])
 
-        self.assertEqual(1, time_frame['query']['quotes']['2010-03-01']['USDUSD'])
-        self.assertEqual(0.668525, time_frame['query']['quotes']['2010-03-01']['USDGBP'])
-        self.assertEqual(0.738541, time_frame['query']['quotes']['2010-03-01']['USDEUR'])
+        self.assertEqual(1, time_frame['quotes']['2010-03-01']['USDUSD'])
+        self.assertEqual(0.668529, time_frame['quotes']['2010-03-01']['USDGBP'])
+        self.assertEqual(0.738545, time_frame['quotes']['2010-03-01']['USDEUR'])
 
-        self.assertEqual(1, time_frame['query']['quotes']['2010-03-02']['USDUSD'])
-        self.assertEqual(0.668827, time_frame['query']['quotes']['2010-03-02']['USDGBP'])
-        self.assertEqual(0.736145, time_frame['query']['quotes']['2010-03-02']['USDEUR'])
+        self.assertEqual(1, time_frame['quotes']['2010-03-02']['USDUSD'])
+        self.assertEqual(0.668831, time_frame['quotes']['2010-03-02']['USDGBP'])
+        self.assertEqual(0.736149, time_frame['quotes']['2010-03-02']['USDEUR'])
+
+    def test_timeframe_for_GB(self):
+        time_frame = self.client.timeframe('2010-03-01', '2010-04-01', ['USD', 'EUR'], 'GBP')
+
+        if 'error' in time_frame:
+            raise unittest.SkipTest(
+                'SKIPPED TESTED DUE NOT HAVING ENTERPRISE ACCOUNT FOR TEST: test_timeframe')
+
+        self.assertEqual('GBP', time_frame['source'])
+        self.assertEqual('2010-03-01', time_frame['start_date'])
+        self.assertEqual('2010-04-01', time_frame['end_date'])
+
+        self.assertEqual(1.495821, time_frame['quotes']['2010-03-01']['GBPUSD'])
+        self.assertEqual(1.104731, time_frame['quotes']['2010-03-01']['GBPEUR'])
+
+        self.assertEqual(1.495146, time_frame['quotes']['2010-03-02']['GBPUSD'])
+        self.assertEqual(1.10065, time_frame['quotes']['2010-03-02']['GBPEUR'])
+
+    def test_change_queries(self):
+        time_frame = self.client.change_queries('2005-01-01', '2010-01-01', ['GBP', 'EUR'])
+
+        if 'error' in time_frame:
+            raise unittest.SkipTest(
+                'SKIPPED TESTED DUE NOT HAVING ENTERPRISE ACCOUNT FOR TEST: test_timeframe')
+
+        self.assertEqual('USD', time_frame['source'])
+        self.assertEqual('2005-01-01', time_frame['start_date'])
+        self.assertEqual('2010-01-01', time_frame['end_date'])
+
+        self.assertEqual(0.51961, time_frame['quotes']['USDGBP']['start_rate'])
+        self.assertEqual(0.618228, time_frame['quotes']['USDGBP']['end_rate'])
+        self.assertEqual(0.0986, time_frame['quotes']['USDGBP']['change'])
+        self.assertEqual(18.9792, time_frame['quotes']['USDGBP']['change_pct'])
+
+        self.assertEqual(0.73618, time_frame['quotes']['USDEUR']['start_rate'])
 
 
 if __name__ == '__main__':
