@@ -68,7 +68,7 @@ To get live rates, for specific currencies Call live_rates_for method and pass o
 
     import currencylayer
     exchange_rate = currencylayer.Client(access_key=YOUR_ACCESS_KEY)
-    exchange_rate.test_get_live_rates_for(currencies=['AUD','CHF','EUR','GBP','PLN'], base_currency='USD')
+    exchange_rate.live_rates_for(currencies=['AUD','CHF','EUR','GBP','PLN'], base_currency='USD')
     e.g reponse
         {
             "success": true,
