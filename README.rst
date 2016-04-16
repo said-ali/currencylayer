@@ -1,16 +1,15 @@
 currencylayer
-=============
+------------------------------------------------
+
 .. image:: https://img.shields.io/pypi/v/currencylayer.svg
-    :target: https://img.shields.io/pypi/v/currencylayer.svg
+    :target: https://pypi.python.org/pypi/currencylayer
     :alt: Latest PyPI version
 
-.. image:: https://travis-ci.org/bradleyayers/django-tables2.svg
-    :target: https://travis-ci.org/Said007/currencylayer.svg?branch=master
-    :alt: Travis CI
-
-
-        Python API client for currencylayer. This library supports all API access provide by currencylayer. Check https://currencylayer.com/documentation for more info.
-        This package is compatible with Python 2.7, 3.0 to 3.5
+.. image:: https://travis-ci.org/Said007/currencylayer.svg?branch=master
+    :target: https://travis-ci.org/Said007/currencylayer
+    
+Python API client for currencylayer. This library supports all API access provide by currencylayer. Check https://currencylayer.com documentation for more info.
+This package is compatible with Python 2.7, 3.2, 3.3, 3.4 & 3.5
 
 Basic Use
 ---------
@@ -242,7 +241,7 @@ Install the latest release with:
 
 Compatibility
 -------------
-Python 2.7, 3.0 to 3.5
+Python 2.7, 3.2, 3.3, 3.4 & 3.5
 
 
 Authors
