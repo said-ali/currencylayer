@@ -6,7 +6,7 @@ from .client import Client
 class TestClient(unittest.TestCase):
     def setUp(self):
         # Please enter your own client key
-        self.client = Client('3bf3dfc68e199026f8552740c2692043')
+        self.client = Client('25899ea30ea0f886083d4b3af3c0535e')
 
     def test_get_live_rates(self):
         rates = self.client.live_rates()
