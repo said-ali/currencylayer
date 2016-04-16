@@ -1,6 +1,6 @@
 import unittest
 from decimal import Decimal
-from client import Client
+from .client import Client
 
 
 class TestClient(unittest.TestCase):
