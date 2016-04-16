@@ -8,7 +8,7 @@ setuptools.setup(
     author="Said Ali",
     author_email="said.ali@msn.com",
 
-    description="currencylayer python API client",
+    description="currencylayer for python API client",
     long_description=open('README.rst').read(),
 
     packages=setuptools.find_packages(),
