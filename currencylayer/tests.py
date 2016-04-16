@@ -5,7 +5,8 @@ from client import Client
 
 class TestClient(unittest.TestCase):
     def setUp(self):
-        self.client = Client('Insert access_key')
+        # Please enter your own client key
+        self.client = Client('3bf3dfc68e199026f8552740c2692043')
 
     def test_get_live_rates(self):
         rates = self.client.live_rates()
@@ -68,7 +69,6 @@ class TestClient(unittest.TestCase):
 
     def test_convert(self):
         convert_rate = self.client.convert('USD', 'GBP', 10, '2005-01-01')
-        print convert_rate
 
         if 'error' in convert_rate:
             raise unittest.SkipTest(
